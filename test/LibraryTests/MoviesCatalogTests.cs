@@ -5,12 +5,12 @@ namespace Ucu.Poo.Repositories.Tests
     [TestFixture]
     public class MoviesCatalogTests
     {
-        private MoviesCatalog catalog;
+        private Repository<Movie> moviesCatalog;
 
         [SetUp]
         public void SetUp()
         {
-            this.catalog = new MoviesCatalog();
+            this.moviesCatalog = new Repository<Movie>();
         }
 
         [Test]
@@ -18,18 +18,18 @@ namespace Ucu.Poo.Repositories.Tests
         {
             Movie movie = new Movie("Inception", 2010);
 
-            this.catalog.Add(movie);
+            this.moviesCatalog.Add(movie);
 
-            Movie found = this.catalog.Find(m => m.Name == "Inception");
+            Movie found = this.moviesCatalog.Find(m => m.Name == "Inception");
             Assert.That(found, Is.SameAs(movie));
         }
 
         [Test]
         public void Add_NullMovie_MovieIsNotAdded()
         {
-            this.catalog.Add(null);
+            this.moviesCatalog.Add(null);
 
-            Movie found = this.catalog.Find(m => m == null);
+            Movie found = this.moviesCatalog.Find(m => m == null);
             Assert.That(found, Is.Null);
         }
 
@@ -37,11 +37,11 @@ namespace Ucu.Poo.Repositories.Tests
         public void Remove_ExistingMovie_MovieIsNoLongerFound()
         {
             Movie movie = new Movie("The Matrix", 1999);
-            this.catalog.Add(movie);
+            this.moviesCatalog.Add(movie);
 
-            this.catalog.Remove(movie);
+            this.moviesCatalog.Remove(movie);
 
-            Movie found = this.catalog.Find(m => m.Name == "The Matrix");
+            Movie found = this.moviesCatalog.Find(m => m.Name == "The Matrix");
             Assert.That(found, Is.Null);
         }
 
@@ -49,9 +49,9 @@ namespace Ucu.Poo.Repositories.Tests
         public void Find_MatchingCriteria_ReturnsMovie()
         {
             Movie movie = new Movie("Interstellar", 2014);
-            this.catalog.Add(movie);
+            this.moviesCatalog.Add(movie);
 
-            Movie found = this.catalog.Find(m => m.Year == 2014);
+            Movie found = this.moviesCatalog.Find(m => m.Year == 2014);
 
             Assert.That(found, Is.SameAs(movie));
         }
@@ -60,9 +60,9 @@ namespace Ucu.Poo.Repositories.Tests
         public void Find_NoMatchingCriteria_ReturnsNull()
         {
             Movie movie = new Movie("Dunkirk", 2017);
-            this.catalog.Add(movie);
+            this.moviesCatalog.Add(movie);
 
-            Movie found = this.catalog.Find(m => m.Name == "Tenet");
+            Movie found = this.moviesCatalog.Find(m => m.Name == "Tenet");
 
             Assert.That(found, Is.Null);
         }
@@ -70,7 +70,7 @@ namespace Ucu.Poo.Repositories.Tests
         [Test]
         public void Find_EmptyCatalog_ReturnsNull()
         {
-            Movie found = this.catalog.Find(m => true);
+            Movie found = this.moviesCatalog.Find(m => true);
 
             Assert.That(found, Is.Null);
         }

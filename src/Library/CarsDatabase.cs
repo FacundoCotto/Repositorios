@@ -12,7 +12,7 @@ namespace Ucu.Poo.Repositories
     /// <summary>
     /// Esta clase representa una base de datos de autos.
     /// </summary>
-    public class CarsDatabase
+    public class CarsDatabase : IRepository<Car>
     {
         private ArrayList cars = new ArrayList();
 

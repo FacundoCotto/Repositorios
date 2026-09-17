@@ -12,7 +12,7 @@ namespace Ucu.Poo.Repositories
     /// <summary>
     /// Esta clase representa un catálogo de películas.
     /// </summary>
-    public class MoviesCatalog
+    public class MoviesCatalog : IRepository<Movie>
     {
         private ArrayList movies = new ArrayList();
 
